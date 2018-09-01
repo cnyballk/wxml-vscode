@@ -1,6 +1,6 @@
 # wxml-vscode
 
-[![VS Code Marketplace](https://vsmarketplacebadge.apphb.com/version-short/wxml-vscode.svg)
+[![VS Code Marketplace](https://vsmarketplacebadge.apphb.com/version-short/wxml-vscode.svg)]
 
 [wxml-vscode 仓库](https://github.com/cnyballk/wxml-vscode)
 
