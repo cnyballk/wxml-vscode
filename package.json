@@ -1,20 +1,39 @@
 {
   "name": "wxml-vscode",
   "displayName": "wxml",
-  "description": "",
+  "description": "微信小程序格式化以及高亮组件",
   "version": "0.0.1",
   "publisher": "cnyballk",
   "engines": {
     "vscode": "^1.23.0"
   },
+  "main": "./dist/extension",
+  "keywords": [
+    "wxml",
+    "小程序",
+    "mini",
+    "wechat",
+    "weapp",
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
   "categories": [
     "Other"
   ],
+  "author": "cnyballk <584518260@qq.com> (https://github.com/cnyballk)",
   "activationEvents": [
     "onCommand:extension.formatwxml",
     "onLanguage:wxml"
   ],
-  "main": "./out/extension",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnyballk/wxml-vscode"
+  },
   "contributes": {
     "configuration": {
       "title": "wxml-vscode",
@@ -66,14 +85,7 @@
       }
     ]
   },
-  "icon": "res/icon.png",
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test"
-  },
+  "icon": "public/icon.jpg",
   "devDependencies": {
     "@types/js-beautify": "0.0.31",
     "@types/mocha": "^2.2.42",
