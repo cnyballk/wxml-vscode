@@ -1,17 +1,25 @@
 # wxml-vscode
 
+[![VS Code Marketplace](https://vsmarketplacebadge.apphb.com/version-short/wxml-vscode.svg)
+
 [wxml-vscode 仓库](https://github.com/cnyballk/wxml-vscode)
 
 [提问题](https://github.com/cnyballk/wxml-vscode/issues)
+
+## 安装
+
+通过 F1 或者 CMD + Shift + P 输入 install. 选择: Install Extension.
 
 ## 特性
 
 - 格式化功能
 - 高亮组件功能
 
-格式化 支持 通过 F1 输入 format wxml 命令 或者右键菜单，也可以开启保存后自动格式化
+###  如何使用格式化功能
 
-目前可配置项:
+格式化 支持 通过 F1 或者 CMD + Shift + P 输入 format wxml 命令 或者右键菜单，也可以开启保存后自动格式化
+
+###   目前可配置项
 
 ```json
 // 高亮的颜色，emm暂时只支持这样写
