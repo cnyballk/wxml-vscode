@@ -1,0 +1,88 @@
+{
+  "name": "wxml-vscode",
+  "displayName": "wxml",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "cnyballk",
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.formatwxml",
+    "onLanguage:wxml"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "configuration": {
+      "title": "wxml-vscode",
+      "properties": {
+        "wxmlConfig.format": {
+          "type": "object",
+          "description": "wxml格式化的属性。可配置的属性可以这里看https://github.com/beautify-web/js-beautify",
+          "default": {
+            "indent_size": 2,
+            "wrap_attributes": "force-expand-multiline"
+          }
+        },
+        "wxmlConfig.activeDisable": {
+          "type": "boolean",
+          "description": "是否禁用高亮组件",
+          "default": false
+        },
+        "wxmlConfig.activeColor": {
+          "type": "object",
+          "description": "高亮的颜色，emm暂时只支持这样写",
+          "default": {
+            "color": "#e5c07b"
+          }
+        },
+        "wxmlConfig.tagNoActiveArr": {
+          "type": "array",
+          "description": "高亮所忽略的组件数组",
+          "default": [
+            "view",
+            "button",
+            "text",
+            "icon",
+            "image",
+            "navigator",
+            "block",
+            "input",
+            "template",
+            "form",
+            "camera",
+            "textarea"
+          ]
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.formatwxml",
+        "title": "format wxml"
+      }
+    ]
+  },
+  "icon": "res/icon.png",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/js-beautify": "0.0.31",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.21"
+  },
+  "dependencies": {
+    "js-beautify": "^1.7.5"
+  }
+}
