@@ -13,7 +13,7 @@
     "小程序",
     "mini",
     "wechat",
-    "weapp",
+    "weapp"
   ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
