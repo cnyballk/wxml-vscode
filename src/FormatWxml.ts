@@ -2,7 +2,7 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-08-31 10:43:17 
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-01 15:44:20
+ * @Last Modified time: 2018-09-01 21:13:01
  */
 import { window, workspace, Position, Range } from 'vscode';
 import { html as htmlBeautify } from 'js-beautify';
@@ -25,10 +25,9 @@ export default class FormatWxml {
     if (!wxmlFormatConf) {
       return;
     }
-    return Object.assign({}, wxmlFormatConf);
+    return wxmlFormatConf;
   }
   private beauty(text: string) {
-    console.log(this.getConfig());
     let str = htmlBeautify(text, {
       html: this.getConfig(),
     } as any);

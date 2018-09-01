@@ -7,7 +7,7 @@
   "engines": {
     "vscode": "^1.23.0"
   },
-  "main": "./dist/extension",
+  "main": "./out/extension",
   "keywords": [
     "wxml",
     "小程序",
@@ -42,7 +42,16 @@
           "type": "object",
           "description": "wxml格式化的属性。可配置的属性可以这里看https://github.com/beautify-web/js-beautify",
           "default": {
+            "brace_style": "collapse",
+            "end_with_newline": false,
+            "indent_char": "",
+            "indent_handlebars": false,
+            "indent_inner_html": false,
+            "indent_scripts": "keep",
             "indent_size": 2,
+            "indent_with_tabs": true,
+            "max_preserve_newlines": 1,
+            "preserve_newlines": true,
             "wrap_attributes": "force-expand-multiline"
           }
         },
