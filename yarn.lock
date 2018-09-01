@@ -1523,7 +1523,7 @@ vinyl@^2.0.1, vinyl@^2.0.2:
 
 vscode@^1.1.21:
   version "1.1.21"
-  resolved "http://registry.npm.taobao.org/vscode/download/vscode-1.1.21.tgz#1c8253d6238aefb4112d6e58cf975ad25313dafc"
+  resolved "https://registry.yarnpkg.com/vscode/-/vscode-1.1.21.tgz#1c8253d6238aefb4112d6e58cf975ad25313dafc"
   dependencies:
     glob "^7.1.2"
     gulp-chmod "^2.0.0"

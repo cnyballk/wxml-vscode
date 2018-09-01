@@ -28,7 +28,7 @@ class ActiveText {
             tid = setTimeout(() => this.onChange(editor, resetCache), 500);
         };
         this.disposables.push(vscode_1.window.onDidChangeVisibleTextEditors(editors => {
-            editors.forEach(e => this.onChange(e));
+            editors.forEach(e => this.onChange(e, !this.config.cache));
             this.updateDecorationCache();
         }), 
         // window.onDidChangeActiveTextEditor(editor => {
@@ -61,12 +61,14 @@ class ActiveText {
     decorateWxml(editor) {
         let doc = editor.document;
         let text = doc.getText();
+        console.log('gengxin');
         let comments = getRanges(text, COMMENT_REGEXP, doc, []);
         let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
         let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, this.config.activeColor));
         if (this.decorationCache[doc.fileName])
             this.decorationCache[doc.fileName].style.dispose();
         editor.setDecorations(decorationType, ranges);
+        this.config.cache = true;
         this.decorationCache[doc.fileName] = { style: decorationType, ranges };
     }
     updateDecorationCache() {

@@ -38,7 +38,7 @@ export default class ActiveText {
 
     this.disposables.push(
       window.onDidChangeVisibleTextEditors(editors => {
-        editors.forEach(e => this.onChange(e));
+        editors.forEach(e => this.onChange(e, !this.config.cache as any));
         this.updateDecorationCache();
       }),
       // window.onDidChangeActiveTextEditor(editor => {
@@ -58,10 +58,8 @@ export default class ActiveText {
 
   onChange(editor: TextEditor | undefined, resetCache?: boolean) {
     if (!editor) return;
-
     let doc = editor.document;
     if (this.config.activeDisable) return;
-
     if (doc.languageId === 'wxml') {
       let cache = this.decorationCache[doc.fileName];
       if (cache && !resetCache) {
@@ -75,18 +73,18 @@ export default class ActiveText {
   decorateWxml(editor: TextEditor) {
     let doc = editor.document;
     let text = doc.getText();
+    console.log('gengxin');
 
     let comments = getRanges(text, COMMENT_REGEXP, doc, []);
     let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
     let decorationType = window.createTextEditorDecorationType(
       Object.assign({}, this.config.activeColor)
     );
-
     if (this.decorationCache[doc.fileName])
       this.decorationCache[doc.fileName].style.dispose();
 
     editor.setDecorations(decorationType, ranges);
-
+    this.config.cache = true;
     this.decorationCache[doc.fileName] = { style: decorationType, ranges };
   }
 

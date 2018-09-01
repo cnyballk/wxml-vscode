@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-08-31 10:43:17
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-01 15:44:20
+ * @Last Modified time: 2018-09-01 21:13:01
  */
 const vscode_1 = require("vscode");
 const js_beautify_1 = require("js-beautify");
@@ -13,10 +13,12 @@ class FormatWxml {
         this.editor = vscode_1.window.activeTextEditor;
         if (!this.editor)
             throw new Error('no active editor');
-        const doc = this.editor.document;
-        const text = this.beauty(doc.getText());
-        this.lineNumber = doc.lineCount;
-        this.writeToFile(text);
+        if (this.editor.document.languageId === 'wxml') {
+            const doc = this.editor.document;
+            const text = this.beauty(doc.getText());
+            this.lineNumber = doc.lineCount;
+            this.writeToFile(text);
+        }
     }
     getConfig() {
         let wxmlFormatConf = vscode_1.workspace
@@ -25,10 +27,9 @@ class FormatWxml {
         if (!wxmlFormatConf) {
             return;
         }
-        return Object.assign({}, wxmlFormatConf);
+        return wxmlFormatConf;
     }
     beauty(text) {
-        console.log(this.getConfig());
         let str = js_beautify_1.html(text, {
             html: this.getConfig(),
         });

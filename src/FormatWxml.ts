@@ -13,10 +13,13 @@ export default class FormatWxml {
   public init() {
     this.editor = window.activeTextEditor;
     if (!this.editor) throw new Error('no active editor');
-    const doc = this.editor.document;
-    const text = this.beauty(doc.getText());
-    this.lineNumber = doc.lineCount;
-    this.writeToFile(text);
+
+    if (this.editor.document.languageId === 'wxml') {
+      const doc = this.editor.document;
+      const text = this.beauty(doc.getText());
+      this.lineNumber = doc.lineCount;
+      this.writeToFile(text);
+    }
   }
   getConfig() {
     let wxmlFormatConf = workspace

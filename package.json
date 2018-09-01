@@ -1,8 +1,8 @@
 {
   "name": "wxml-vscode",
   "displayName": "wxml",
-  "description": "微信小程序格式化以及高亮组件",
-  "version": "0.0.1",
+  "description": "微信小程序wxml格式化以及高亮组件(高度自定义)",
+  "version": "0.0.2",
   "publisher": "cnyballk",
   "engines": {
     "vscode": "^1.23.0"
@@ -55,6 +55,11 @@
             "wrap_attributes": "force-expand-multiline"
           }
         },
+        "wxmlConfig.onSaveFormat": {
+          "type": "boolean",
+          "description": "是否开启保存自动格式化",
+          "default": false
+        },
         "wxmlConfig.activeDisable": {
           "type": "boolean",
           "description": "是否禁用高亮组件",
@@ -62,7 +67,7 @@
         },
         "wxmlConfig.activeColor": {
           "type": "object",
-          "description": "高亮的颜色，emm暂时只支持这样写",
+          "description": "高亮的颜色，emm暂时只支持这样写,后续看看搞个每个组件可设置自定义颜色",
           "default": {
             "color": "#e5c07b"
           }
@@ -79,6 +84,7 @@
             "navigator",
             "block",
             "input",
+            "label",
             "template",
             "form",
             "camera",
@@ -92,7 +98,16 @@
         "command": "extension.formatwxml",
         "title": "format wxml"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorLangId == wxml",
+          "command": "extension.formatwxml",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "icon": "public/icon.jpg",
   "devDependencies": {

@@ -4,31 +4,50 @@
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
  * @Last Modified time: 2018-09-01 21:17:37
  */
-import * as vscode from 'vscode';
+import {
+  workspace,
+  window,
+  ConfigurationChangeEvent,
+  Disposable,
+} from 'vscode';
 
-let listener: vscode.Disposable;
+let listener: Disposable;
 export interface Config {
   activeColor: object;
   activeDisable: Boolean;
   onSaveFormat: Boolean;
+  cache: Boolean;
   tagNoActiveArr: string[];
 }
 export const config: Config = {
   activeColor: {},
-  onSaveFormat: true,
+  cache: false,
+  onSaveFormat: false,
   activeDisable: false,
   tagNoActiveArr: [],
 };
 
-function getConfig() {}
-
-export function configActivate() {
-  listener = vscode.workspace.onDidChangeConfiguration(getConfig);
-  const wxml = vscode.workspace.getConfiguration('wxmlConfig');
+export function getConfig(e?: ConfigurationChangeEvent) {
+  if (e && !e.affectsConfiguration('wxmlConfig')) return;
+  const wxml = workspace.getConfiguration('wxmlConfig');
   config.activeColor = wxml.get('activeColor', {});
   config.activeDisable = wxml.get('activeDisable', false);
   config.tagNoActiveArr = wxml.get('tagNoActiveArr', []);
-  config.onSaveFormat = wxml.get('onSaveFormat', true);
+  config.onSaveFormat = wxml.get('onSaveFormat', false);
+  config.cache = false;
+}
+
+export function configActivate(activeText: any) {
+  listener = workspace.onDidChangeConfiguration(
+    (e: ConfigurationChangeEvent) => {
+      getConfig(e);
+      let tid: NodeJS.Timer = null as any;
+      if (tid) clearTimeout(tid);
+      tid = setTimeout(() => {
+        activeText.onChange(window.activeTextEditor, true);
+      }, 500);
+    }
+  );
 }
 export function configDeactivate() {
   listener.dispose();
