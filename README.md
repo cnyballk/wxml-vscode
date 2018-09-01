@@ -1,6 +1,6 @@
 # wxml-vscode
 
-[wxml-vscode](https://github.com/cnyballk/wxml-vscode)
+[wxml-vscode 仓库](https://github.com/cnyballk/wxml-vscode)
 
 [提问题](https://github.com/cnyballk/wxml-vscode/issues)
 
