@@ -7,7 +7,7 @@ var debug =
 
 var fs = require('fs'),
   cc = require('config-chain'),
-  beautify = require('../index'),
+  beautify = require('.'),
   mkdirp = require('mkdirp'),
   nopt = require('nopt');
 

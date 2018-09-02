@@ -2,11 +2,14 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-08-31 10:43:17 
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 00:33:23
+ * @Last Modified time: 2018-09-03 01:21:59
  */
 import { window, workspace, Position, Range } from 'vscode';
-import htmlBeautify from './js-beautify';
-
+var beautifier = require('./js-beautify/src/index.js');
+console.log('====================================');
+console.log(beautifier);
+console.log('====================================');
+const htmlBeautify = beautifier.html;
 export default class FormatWxml {
   editor: any;
   lineNumber: any;
