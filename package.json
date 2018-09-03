@@ -112,6 +112,7 @@
   },
   "icon": "public/icon.jpg",
   "devDependencies": {
+    "@types/js-beautify": "^0.0.31",
     "@types/mocha": "^2.2.42",
     "@types/node": "^7.0.43",
     "tslint": "^5.8.0",
@@ -119,7 +120,6 @@
     "vscode": "^1.1.21"
   },
   "dependencies": {
-    "@types/js-beautify": "^0.0.31",
     "js-beautify": "^1.8.1"
   }
 }

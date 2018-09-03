@@ -1,11 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-08-31 10:43:17
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-01 21:13:01
+ * @Last Modified time: 2018-09-03 11:31:58
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 const vscode_1 = require("vscode");
 const js_beautify_1 = require("js-beautify");
 class FormatWxml {

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-08-31 10:40:17
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-01 21:17:02
+ * @Last Modified time: 2018-09-03 01:21:54
  */
 const vscode_1 = require("vscode");
 const ActiveText_1 = require("./ActiveText");
