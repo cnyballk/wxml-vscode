@@ -19,6 +19,8 @@
 
 ###   目前可配置项
 
+wxmlConfig.format 可配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
+
 ```json
 // 高亮的颜色，emm暂时只支持这样写
 "wxmlConfig.activeColor": {
@@ -30,7 +32,6 @@
   // 是否开启保存自动格式化
   "wxmlConfig.onSaveFormat": false,
 
-  // wxml格式化的属性。可配置的属性可以这里看https://github.com/beautify-web/js-beautify
   "wxmlConfig.format": {
     "brace_style": "collapse",
     "end_with_newline": false,

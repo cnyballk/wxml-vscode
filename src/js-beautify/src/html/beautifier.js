@@ -288,7 +288,7 @@ Beautifier.prototype.beautify = function() {
       n_raw_token.type === TOKEN.TAG_OPEN ||
       n_raw_token.type === TOKEN.COMMENT
     ) {
-      atrr_num && __arrrr.push(atrr_num);
+      __arrrr.push(atrr_num);
       atrr_num = 0;
     } else if (n_raw_token.type === TOKEN.ATTRIBUTE) {
       atrr_num += 1;
@@ -296,6 +296,7 @@ Beautifier.prototype.beautify = function() {
 
     n_raw_token = n_tokens.next();
   }
+  __arrrr.shift();
   var parser_token = null;
   var raw_token = tokens.next();
   ////////////////////////////////////////////////////////////////////
@@ -420,7 +421,6 @@ Beautifier.prototype._handle_inside_tag = function(
       last_tag_token.tag_start_char === '<'
     ) {
       var wrapped = printer.print_space_or_wrap(raw_token.text);
-
       if (raw_token.type === TOKEN.ATTRIBUTE) {
         var indentAttrs = wrapped && !this._is_wrap_attributes_force;
         if (this._is_wrap_attributes_force) {
@@ -479,7 +479,9 @@ Beautifier.prototype._handle_text = function(
   //   raw_token.next.type !== TOKEN.TEXT
   // ) {
   // }
-  printer.print_newline(false);
+  if (last_tag_token.has_wrapped_attrs) {
+    printer.print_newline(false);
+  }
   if (last_tag_token.custom_beautifier) {
     //check if we need to format javascript
     this._print_custom_beatifier_text(printer, raw_token, last_tag_token);
@@ -558,7 +560,13 @@ Beautifier.prototype._handle_tag_open = function(
   last_tag_token,
   last_token
 ) {
-  if (raw_token.previous.type == TOKEN.TEXT) {
+  //可能不会转行
+  if (
+    raw_token.previous.type === TOKEN.TEXT &&
+    (last_tag_token.has_wrapped_attrs ||
+      (raw_token.previous.previous.text === '>' &&
+        raw_token.previous.previous.previous.text.substr(0, 2) === '</'))
+  ) {
     printer.print_newline(false);
   }
   var parser_token = this._get_tag_open_token(raw_token);

@@ -51,6 +51,7 @@
             "indent_size": 2,
             "indent_with_tabs": true,
             "max_preserve_newlines": 1,
+            "wrap_attributes_count": 4,
             "preserve_newlines": true,
             "wrap_attributes": "force-expand-multiline"
           }
@@ -118,6 +119,7 @@
     "vscode": "^1.1.21"
   },
   "dependencies": {
+    "@types/js-beautify": "^0.0.31",
     "js-beautify": "^1.8.1"
   }
 }
