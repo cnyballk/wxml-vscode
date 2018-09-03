@@ -3,6 +3,5 @@ node_modules
 .vscode-test/
 *.vsix
 
-.vscode
-
+yarn-error.log
 vsc-extension-quickstart.md

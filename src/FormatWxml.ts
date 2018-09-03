@@ -2,8 +2,9 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-08-31 10:43:17 
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-01 21:13:01
+ * @Last Modified time: 2018-09-03 11:31:58
  */
+
 import { window, workspace, Position, Range } from 'vscode';
 import { html as htmlBeautify } from 'js-beautify';
 
