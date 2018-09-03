@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-08-31 10:44:00
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 11:36:41
+ * @Last Modified time: 2018-09-03 13:07:07
  */
 const vscode_1 = require("vscode");
 let listener;
@@ -26,9 +26,10 @@ function getConfig(e) {
     exports.config.cache = false;
 }
 exports.getConfig = getConfig;
-function configActivate(activeText) {
+function configActivate(activeText, saveFormat) {
     listener = vscode_1.workspace.onDidChangeConfiguration((e) => {
         getConfig(e);
+        saveFormat();
         let tid = null;
         if (tid)
             clearTimeout(tid);

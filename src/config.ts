@@ -2,7 +2,7 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-08-31 10:44:00
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 11:36:41
+ * @Last Modified time: 2018-09-03 13:07:07
  */
 import {
   workspace,
@@ -37,10 +37,11 @@ export function getConfig(e?: ConfigurationChangeEvent) {
   config.cache = false;
 }
 
-export function configActivate(activeText: any) {
+export function configActivate(activeText: any, saveFormat: any) {
   listener = workspace.onDidChangeConfiguration(
     (e: ConfigurationChangeEvent) => {
       getConfig(e);
+      saveFormat();
       let tid: NodeJS.Timer = null as any;
       if (tid) clearTimeout(tid);
       tid = setTimeout(() => {

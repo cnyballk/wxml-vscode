@@ -3,11 +3,11 @@
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-08-31 10:43:17
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 11:31:58
+ * @Last Modified time: 2018-09-03 12:52:47
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode_1 = require("vscode");
-const js_beautify_1 = require("js-beautify");
+const cny_js_beautify_1 = require("cny_js_beautify");
 class FormatWxml {
     init() {
         this.editor = vscode_1.window.activeTextEditor;
@@ -30,7 +30,7 @@ class FormatWxml {
         return wxmlFormatConf;
     }
     beauty(text) {
-        let str = js_beautify_1.html(text, {
+        let str = cny_js_beautify_1.html(text, {
             html: this.getConfig(),
         });
         return `${str}\n\n`;

@@ -2,7 +2,7 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-08-31 10:40:17 
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 01:21:54
+ * @Last Modified time: 2018-09-03 13:15:31
  */
 import { commands, ExtensionContext } from 'vscode';
 
@@ -16,7 +16,9 @@ export function activate(context: ExtensionContext) {
   getConfig();
   saveFormat(wxml);
   const activeText = new ActiveText(config);
-  configActivate(activeText);
+  configActivate(activeText, () => {
+    saveFormat(wxml);
+  });
   context.subscriptions.push(activeText);
   commands.registerCommand('extension.formatwxml', () => {
     wxml.init();

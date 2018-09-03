@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-09-01 15:45:26
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-01 15:44:53
+ * @Last Modified time: 2018-09-03 13:05:23
  */
 const config_1 = require("./config");
 const vscode_1 = require("vscode");
@@ -61,7 +61,6 @@ class ActiveText {
     decorateWxml(editor) {
         let doc = editor.document;
         let text = doc.getText();
-        console.log('gengxin');
         let comments = getRanges(text, COMMENT_REGEXP, doc, []);
         let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
         let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, this.config.activeColor));
