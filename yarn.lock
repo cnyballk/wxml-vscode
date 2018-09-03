@@ -251,6 +251,10 @@ cloneable-readable@^1.0.0:
     process-nextick-args "^2.0.0"
     readable-stream "^2.3.5"
 
+cny_js_beautify@^0.0.3:
+  version "0.0.3"
+  resolved "http://registry.npm.taobao.org/cny_js_beautify/download/cny_js_beautify-0.0.3.tgz#c50a960b6bf82c676c367b5538ab463018ed67a9"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "http://registry.npm.taobao.org/co/download/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
