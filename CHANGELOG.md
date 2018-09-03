@@ -11,3 +11,8 @@ All notable changes to the "wxml-vscode" extension will be documented in this fi
 
 - 增加保存自动格式化功能
 - 增加右键菜单使用 fromat wxml 命令
+
+## [0.0.3]
+
+- 增加 wxmlConfig.format.wrap_attributes_count 配置属性
+- 让格式化看起来更漂亮

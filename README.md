@@ -21,6 +21,22 @@
 
 wxmlConfig.format 可配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
 
+wxmlConfig.format.wrap_attributes_count 超过几个 attributes 属性则全部转行
+
+**example**
+
+```html
+<!-- if wxmlConfig.format.wrap_attributes_count === 2 -->
+<button id="x" class="xx"></button>
+<button id="x" ></button>
+<!-- ⬇⬇⬇⬇ -->
+<button
+  id="x"
+  class="xx"
+></button>
+<button id="x" ></button>
+```
+
 ```json
 // 高亮的颜色，emm暂时只支持这样写
 "wxmlConfig.activeColor": {

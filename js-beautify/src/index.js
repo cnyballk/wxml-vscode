@@ -10,7 +10,8 @@ function style_html(html_source, options, js, css) {
   return html_beautify(html_source, options, js, css);
 }
 var a = `
-    <button id="a" class="b" title="c" data-a="d">11</button>
+<button id="x" class="xx"></button>
+<button id="x" ></button>
 `;
 var a2 = `
     <button >11</button>
@@ -18,7 +19,7 @@ var a2 = `
 const test = () => {
   var b = style_html(a, {
     indent_size: 2,
-    wrap_attributes_count: 4,
+    wrap_attributes_count: 3,
     wrap_attributes: 'force-expand-multiline',
   });
   console.log(a);
