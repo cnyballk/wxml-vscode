@@ -15,7 +15,7 @@
 
 ### 如何使用格式化功能
 
-格式化 支持 通过 F1 或者 CMD + Shift + P 输入 format wxml 命令 或者右键菜单，也可以开启保存后自动格式化
+格式化 支持 通过 F1 或者 CMD + Shift + P 输入 format wxml 命令 或者右键菜单，也可以配置 wxmlConfig.onSaveFormat 开启保存后自动格式化
 
 ###   目前可配置项
 
