@@ -21,3 +21,8 @@ All notable changes to the "wxml-vscode" extension will be documented in this fi
 
 - 修复 wxmlConfig.onSaveFormat 修改配置 true => false 后依然自动格式化的问题
 - 修复 wxmlConfig.format.wrap_attributes_count 因为 node 依赖无法生效的问题
+
+## [0.0.5]
+
+- 无子元素则闭合标签
+- 修复一些已知的格式化问题
