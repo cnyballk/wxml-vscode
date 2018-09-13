@@ -27,13 +27,13 @@ wxmlConfig.format.wrap_attributes_count 超过几个 attributes 属性则全部�
 ```html
 <!-- if wxmlConfig.format.wrap_attributes_count === 2 -->
 <button id="x" class="xx"></button>
-<button id="x" ></button>
+<button id="x" >123</button>
 <!-- ⬇⬇⬇⬇ -->
 <button
   id="x"
   class="xx"
-></button>
-<button id="x" ></button>
+/>
+<button id="x" >123</button>
 ```
 
 wxmlConfig.format 可配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
