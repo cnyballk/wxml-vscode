@@ -27,7 +27,7 @@ All notable changes to the "wxml-vscode" extension will be documented in this fi
 - 无子元素则闭合标签
 - 修复一些已知的格式化问题
 
-## [0.0.5]
+## [0.0.6]
 
 - wxmlConfig.format 新增 disable_automatic_closing_labels 属性
   是用来禁用自动闭合标签的
