@@ -2,7 +2,7 @@
   "name": "wxml-vscode",
   "displayName": "wxml",
   "description": "微信小程序wxml格式化以及高亮组件(高度自定义)",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "cnyballk",
   "engines": {
     "vscode": "^1.23.0"
@@ -40,7 +40,7 @@
       "properties": {
         "wxmlConfig.format": {
           "type": "object",
-          "description": "wxml格式化的属性。可配置的属性可以这里看https://github.com/beautify-web/js-beautify",
+          "description": "wxml格式化的属性。无特殊说明的配置的属性可以这里看https://github.com/beautify-web/js-beautify",
           "default": {
             "brace_style": "collapse",
             "end_with_newline": false,
@@ -52,6 +52,8 @@
             "indent_with_tabs": true,
             "max_preserve_newlines": 1,
             "wrap_attributes_count": 4,
+            "unformatted": "['text']",
+            "disable_automatic_closing_labels": false,
             "preserve_newlines": true,
             "wrap_attributes": "force-expand-multiline"
           }
@@ -119,6 +121,6 @@
     "vscode": "^1.1.21"
   },
   "dependencies": {
-    "cny_js_beautify": "^0.0.5-alpha.1"
+    "cny_js_beautify": "^0.0.6"
   }
 }

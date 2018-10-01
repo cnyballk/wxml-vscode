@@ -21,7 +21,9 @@
 
 v0.0.3 增加属性
 wxmlConfig.format.wrap_attributes_count 超过几个 attributes 属性则全部转行
-
+v0.0.6
+wxmlConfig.format 新增 disable_automatic_closing_labels 属性
+是用来禁用自动闭合标签的
 **example**
 
 ```html
@@ -36,7 +38,7 @@ wxmlConfig.format.wrap_attributes_count 超过几个 attributes 属性则全部�
 <button id="x" >123</button>
 ```
 
-wxmlConfig.format 可配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
+wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
 
 ```json
 // 高亮的颜色，emm暂时只支持这样写
@@ -59,6 +61,9 @@ wxmlConfig.format 可配置的属性可以[这里看](https://github.com/beautif
     "indent_size": 2,
     "indent_with_tabs": true,
     "max_preserve_newlines": 1,
+    "wrap_attributes_count": 4,
+    "unformatted": "['text']",
+    "disable_automatic_closing_labels": false,
     "preserve_newlines": true,
     "wrap_attributes": "force-expand-multiline"
   },
