@@ -21,6 +21,7 @@
 
 v0.0.3 增加属性
 wxmlConfig.format.wrap_attributes_count 超过几个 attributes 属性则全部转行
+
 v0.0.6
 wxmlConfig.format 新增 disable_automatic_closing_labels 属性
 是用来禁用自动闭合标签的
