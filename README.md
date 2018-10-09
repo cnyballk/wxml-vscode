@@ -80,7 +80,7 @@ wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://git
 
 ### CHANGELOG
 
-[查看版本更新](https:https://github.com/cnyballk/wxml-vscode/blob/master/CHANGELOG.md)
+[查看版本更新](https://github.com/cnyballk/wxml-vscode/blob/master/CHANGELOG.md)
 
 ### LICENSE
 
