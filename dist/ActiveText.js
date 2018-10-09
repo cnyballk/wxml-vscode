@@ -1,10 +1,19 @@
 "use strict";
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-09-01 15:45:26
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 13:05:23
+ * @Last Modified time: 2018-10-09 16:46:08
  */
 const config_1 = require("./config");
 const vscode_1 = require("vscode");
@@ -62,13 +71,29 @@ class ActiveText {
         let doc = editor.document;
         let text = doc.getText();
         let comments = getRanges(text, COMMENT_REGEXP, doc, []);
+        const _a = this.config.activeColor, { color } = _a, tag = __rest(_a, ["color"]);
+        for (let i in tag) {
+            let TAG_REGEXP_POINTER = new RegExp(`</?(${i}\\w*)`, 'g');
+            let ranges = [...getRanges(text, TAG_REGEXP_POINTER, doc, comments, i)];
+            let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, { color: tag[i] }));
+            if (this.decorationCache[doc.fileName + i])
+                this.decorationCache[doc.fileName + i].style.dispose();
+            editor.setDecorations(decorationType, ranges);
+            this.decorationCache[doc.fileName + i] = {
+                style: decorationType,
+                ranges,
+            };
+        }
         let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
-        let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, this.config.activeColor));
-        if (this.decorationCache[doc.fileName])
-            this.decorationCache[doc.fileName].style.dispose();
+        let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, { color }));
+        if (this.decorationCache[doc.fileName + 'color'])
+            this.decorationCache[doc.fileName + 'color'].style.dispose();
         editor.setDecorations(decorationType, ranges);
         this.config.cache = true;
-        this.decorationCache[doc.fileName] = { style: decorationType, ranges };
+        this.decorationCache[doc.fileName + 'color'] = {
+            style: decorationType,
+            ranges,
+        };
     }
     updateDecorationCache() {
         let cache = this.decorationCache;
@@ -88,7 +113,7 @@ class ActiveText {
     }
 }
 exports.default = ActiveText;
-function getRanges(content, regexp, doc, excludeRanges) {
+function getRanges(content, regexp, doc, excludeRanges, tag) {
     let match;
     let ranges = [];
     // tslint:disable:no-conditional-assignment
@@ -96,6 +121,8 @@ function getRanges(content, regexp, doc, excludeRanges) {
         if (match[1]) {
             let { index } = match;
             let word = match[1];
+            if (tag && word !== tag)
+                continue;
             let createRange = true;
             if (regexp === COMMENT_REGEXP) {
                 word = match[0];

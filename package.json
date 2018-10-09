@@ -2,7 +2,7 @@
   "name": "wxml-vscode",
   "displayName": "wxml",
   "description": "微信小程序wxml格式化以及高亮组件(高度自定义)",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "publisher": "cnyballk",
   "engines": {
     "vscode": "^1.23.0"
@@ -70,7 +70,7 @@
         },
         "wxmlConfig.activeColor": {
           "type": "object",
-          "description": "高亮的颜色，emm暂时只支持这样写,后续看看搞个每个组件可设置自定义颜色",
+          "description": "高亮的颜色，可设置每个组件的自定义颜色, [tagName]:color",
           "default": {
             "color": "#e5c07b"
           }
@@ -121,6 +121,6 @@
     "vscode": "^1.1.21"
   },
   "dependencies": {
-    "cny_js_beautify": "^0.0.6"
+    "cny_js_beautify": "^0.0.7"
   }
 }

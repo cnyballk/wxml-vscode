@@ -17,14 +17,6 @@
 
 格式化 支持 通过 F1 或者 CMD + Shift + P 输入 format wxml 命令 或者右键菜单，也可以配置 wxmlConfig.onSaveFormat 开启保存后自动格式化
 
-###   目前可配置项
-
-v0.0.3 增加属性
-wxmlConfig.format.wrap_attributes_count 超过几个 attributes 属性则全部转行
-
-v0.0.6
-wxmlConfig.format 新增 disable_automatic_closing_labels 属性
-是用来禁用自动闭合标签的
 **example**
 
 ```html
@@ -85,3 +77,11 @@ wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://git
     "textarea"
   ]
 ```
+
+### CHANGELOG
+
+[查看版本更新](https:https://github.com/cnyballk/wxml-vscode/blob/master/CHANGELOG.md)
+
+### LICENSE
+
+[MIT](https://github.com/cnyballk/wxml-vscode/blob/master/LICENSE)
