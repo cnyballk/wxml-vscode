@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-09-01 15:45:26
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-10-09 16:46:08
+ * @Last Modified time: 2018-10-11 23:50:06
  */
 const config_1 = require("./config");
 const vscode_1 = require("vscode");
@@ -39,11 +39,7 @@ class ActiveText {
         this.disposables.push(vscode_1.window.onDidChangeVisibleTextEditors(editors => {
             editors.forEach(e => this.onChange(e, !this.config.cache));
             this.updateDecorationCache();
-        }), 
-        // window.onDidChangeActiveTextEditor(editor => {
-        //   this.onChange(editor, true)
-        // }),
-        vscode_1.workspace.onDidChangeTextDocument(e => {
+        }), vscode_1.workspace.onDidChangeTextDocument(e => {
             if (e &&
                 vscode_1.window.activeTextEditor &&
                 e.document === vscode_1.window.activeTextEditor.document) {
@@ -58,12 +54,16 @@ class ActiveText {
         if (this.config.activeDisable)
             return;
         if (doc.languageId === 'wxml') {
-            let cache = this.decorationCache[doc.fileName];
-            if (cache && !resetCache) {
-                editor.setDecorations(cache.style, cache.ranges);
-            }
-            else {
-                this.decorateWxml(editor);
+            const _a = this.config.activeColor, { color } = _a, tag = __rest(_a, ["color"]);
+            tag['color'] = {};
+            for (let i in tag) {
+                let cache = this.decorationCache[doc.fileName + '-cnyballk-' + i];
+                if (cache && !resetCache) {
+                    editor.setDecorations(cache.style, cache.ranges);
+                }
+                else {
+                    this.decorateWxml(editor);
+                }
             }
         }
     }
@@ -76,30 +76,36 @@ class ActiveText {
             let TAG_REGEXP_POINTER = new RegExp(`</?(${i}\\w*)`, 'g');
             let ranges = [...getRanges(text, TAG_REGEXP_POINTER, doc, comments, i)];
             let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, { color: tag[i] }));
-            if (this.decorationCache[doc.fileName + i])
-                this.decorationCache[doc.fileName + i].style.dispose();
+            const _cacheName = doc.fileName + '-cnyballk-' + i;
+            if (this.decorationCache[_cacheName]) {
+                this.decorationCache[_cacheName].style.dispose();
+            }
             editor.setDecorations(decorationType, ranges);
-            this.decorationCache[doc.fileName + i] = {
+            this.decorationCache[_cacheName] = {
                 style: decorationType,
                 ranges,
             };
         }
         let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
         let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, { color }));
-        if (this.decorationCache[doc.fileName + 'color'])
-            this.decorationCache[doc.fileName + 'color'].style.dispose();
+        const _cacheName = doc.fileName + '-cnyballk-color';
+        if (this.decorationCache[doc.fileName]) {
+            this.decorationCache[_cacheName].style.dispose();
+        }
         editor.setDecorations(decorationType, ranges);
         this.config.cache = true;
-        this.decorationCache[doc.fileName + 'color'] = {
+        this.decorationCache[_cacheName] = {
             style: decorationType,
             ranges,
         };
     }
+    //更新
     updateDecorationCache() {
         let cache = this.decorationCache;
         let oldKeys = Object.keys(cache);
         let existKeys = vscode_1.workspace.textDocuments.map(doc => doc.fileName);
         oldKeys.forEach(k => {
+            k = k.split('-cnyballk-')[0];
             if (existKeys.indexOf(k) < 0 && cache[k]) {
                 cache[k].style.dispose();
                 delete cache[k];

@@ -2,6 +2,10 @@
 
 All notable changes to the "wxml-vscode" extension will be documented in this file.
 
+## [0.1.1]
+
+- fix: [#8](https://github.com/cnyballk/wxml-vscode/issues/7)
+
 ## [0.1.0]
 
 - wxmlConfig.activeColor 可设置每个组件的自定义颜色

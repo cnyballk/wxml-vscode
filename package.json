@@ -2,7 +2,7 @@
   "name": "wxml-vscode",
   "displayName": "wxml",
   "description": "微信小程序wxml格式化以及高亮组件(高度自定义)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "cnyballk",
   "engines": {
     "vscode": "^1.23.0"
