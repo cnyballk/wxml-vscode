@@ -2,7 +2,7 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-09-01 15:45:26 
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-10-09 16:46:08
+ * @Last Modified time: 2018-10-11 23:50:06
  */
 import { Config, config } from './config';
 import {
@@ -41,9 +41,6 @@ export default class ActiveText {
         editors.forEach(e => this.onChange(e, !this.config.cache as any));
         this.updateDecorationCache();
       }),
-      // window.onDidChangeActiveTextEditor(editor => {
-      //   this.onChange(editor, true)
-      // }),
       workspace.onDidChangeTextDocument(e => {
         if (
           e &&
@@ -61,11 +58,15 @@ export default class ActiveText {
     let doc = editor.document;
     if (this.config.activeDisable) return;
     if (doc.languageId === 'wxml') {
-      let cache = this.decorationCache[doc.fileName];
-      if (cache && !resetCache) {
-        editor.setDecorations(cache.style, cache.ranges);
-      } else {
-        this.decorateWxml(editor);
+      const { color, ...tag } = this.config.activeColor as any;
+      tag['color'] = {};
+      for (let i in tag) {
+        let cache = this.decorationCache[doc.fileName + '-cnyballk-' + i];
+        if (cache && !resetCache) {
+          editor.setDecorations(cache.style, cache.ranges);
+        } else {
+          this.decorateWxml(editor);
+        }
       }
     }
   }
@@ -81,11 +82,13 @@ export default class ActiveText {
       let decorationType = window.createTextEditorDecorationType(
         Object.assign({}, { color: tag[i] })
       );
-      if (this.decorationCache[doc.fileName + i])
-        this.decorationCache[doc.fileName + i].style.dispose();
+      const _cacheName = doc.fileName + '-cnyballk-' + i;
+      if (this.decorationCache[_cacheName]) {
+        this.decorationCache[_cacheName].style.dispose();
+      }
 
       editor.setDecorations(decorationType, ranges);
-      this.decorationCache[doc.fileName + i] = {
+      this.decorationCache[_cacheName] = {
         style: decorationType,
         ranges,
       };
@@ -94,22 +97,24 @@ export default class ActiveText {
     let decorationType = window.createTextEditorDecorationType(
       Object.assign({}, { color })
     );
-    if (this.decorationCache[doc.fileName + 'color'])
-      this.decorationCache[doc.fileName + 'color'].style.dispose();
-
+    const _cacheName = doc.fileName + '-cnyballk-color';
+    if (this.decorationCache[doc.fileName]) {
+      this.decorationCache[_cacheName].style.dispose();
+    }
     editor.setDecorations(decorationType, ranges);
     this.config.cache = true;
-    this.decorationCache[doc.fileName + 'color'] = {
+    this.decorationCache[_cacheName] = {
       style: decorationType,
       ranges,
     };
   }
-
+  //更新
   updateDecorationCache() {
     let cache = this.decorationCache;
     let oldKeys = Object.keys(cache);
     let existKeys = workspace.textDocuments.map(doc => doc.fileName);
     oldKeys.forEach(k => {
+      k = k.split('-cnyballk-')[0];
       if (existKeys.indexOf(k) < 0 && cache[k]) {
         cache[k].style.dispose();
         delete cache[k];

@@ -9,10 +9,8 @@ function saveFormat(wxml) {
     vscode_1.workspace.onWillSaveTextDocument((e) => {
         const { document: { fileName, isDirty }, } = e;
         if (!isDirty && oldDocument.fileName === fileName) {
-            // console.log('取消格式化');
             return false;
         }
-        // console.log('格式化');
         oldDocument = { fileName };
         if (config_1.config.onSaveFormat) {
             wxml.init();

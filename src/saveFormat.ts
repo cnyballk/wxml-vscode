@@ -10,10 +10,8 @@ export default function saveFormat(wxml: any) {
       document: { fileName, isDirty },
     } = e;
     if (!isDirty && oldDocument.fileName === fileName) {
-      // console.log('取消格式化');
       return false;
     }
-    // console.log('格式化');
     oldDocument = { fileName };
     if (config.onSaveFormat) {
       wxml.init();
