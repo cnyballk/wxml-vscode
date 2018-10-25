@@ -2,7 +2,7 @@
  * @Author: cnyballk[https://github.com/cnyballk] 
  * @Date: 2018-09-01 15:45:26 
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-09-03 13:05:23
+ * @Last Modified time: 2018-10-09 16:46:08
  */
 import { Config, config } from './config';
 import {
@@ -73,18 +73,36 @@ export default class ActiveText {
   decorateWxml(editor: TextEditor) {
     let doc = editor.document;
     let text = doc.getText();
-
     let comments = getRanges(text, COMMENT_REGEXP, doc, []);
+    const { color, ...tag } = this.config.activeColor as any;
+    for (let i in tag) {
+      let TAG_REGEXP_POINTER = new RegExp(`</?(${i}\\w*)`, 'g');
+      let ranges = [...getRanges(text, TAG_REGEXP_POINTER, doc, comments, i)];
+      let decorationType = window.createTextEditorDecorationType(
+        Object.assign({}, { color: tag[i] })
+      );
+      if (this.decorationCache[doc.fileName + i])
+        this.decorationCache[doc.fileName + i].style.dispose();
+
+      editor.setDecorations(decorationType, ranges);
+      this.decorationCache[doc.fileName + i] = {
+        style: decorationType,
+        ranges,
+      };
+    }
     let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
     let decorationType = window.createTextEditorDecorationType(
-      Object.assign({}, this.config.activeColor)
+      Object.assign({}, { color })
     );
-    if (this.decorationCache[doc.fileName])
-      this.decorationCache[doc.fileName].style.dispose();
+    if (this.decorationCache[doc.fileName + 'color'])
+      this.decorationCache[doc.fileName + 'color'].style.dispose();
 
     editor.setDecorations(decorationType, ranges);
     this.config.cache = true;
-    this.decorationCache[doc.fileName] = { style: decorationType, ranges };
+    this.decorationCache[doc.fileName + 'color'] = {
+      style: decorationType,
+      ranges,
+    };
   }
 
   updateDecorationCache() {
@@ -110,7 +128,8 @@ function getRanges(
   content: string,
   regexp: RegExp,
   doc: TextDocument,
-  excludeRanges: Range[]
+  excludeRanges: Range[],
+  tag?: string
 ) {
   let match: RegExpExecArray | null;
   let ranges: Range[] = [];
@@ -119,8 +138,8 @@ function getRanges(
     if (match[1]) {
       let { index } = match;
       let word = match[1];
+      if (tag && word !== tag) continue;
       let createRange = true;
-
       if (regexp === COMMENT_REGEXP) {
         word = match[0];
       } else {
