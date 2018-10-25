@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: cnyballk[https://github.com/cnyballk]
  * @Date: 2018-09-01 15:45:26
  * @Last Modified by: cnyballk[https://github.com/cnyballk]
- * @Last Modified time: 2018-10-11 23:50:06
+ * @Last Modified time: 2018-10-25 10:08:13
  */
 const config_1 = require("./config");
 const vscode_1 = require("vscode");
@@ -50,14 +50,14 @@ class ActiveText {
     onChange(editor, resetCache) {
         if (!editor)
             return;
-        let doc = editor.document;
         if (this.config.activeDisable)
             return;
-        if (doc.languageId === 'wxml') {
+        const { languageId, fileName } = editor.document;
+        if (languageId === 'wxml') {
             const _a = this.config.activeColor, { color } = _a, tag = __rest(_a, ["color"]);
             tag['color'] = {};
             for (let i in tag) {
-                let cache = this.decorationCache[doc.fileName + '-cnyballk-' + i];
+                let cache = this.decorationCache[fileName + '-cnyballk-' + i];
                 if (cache && !resetCache) {
                     editor.setDecorations(cache.style, cache.ranges);
                 }
@@ -66,6 +66,24 @@ class ActiveText {
                 }
             }
         }
+    }
+    //更新
+    updateDecorationCache() {
+        let cache = this.decorationCache;
+        let oldKeys = Object.keys(cache);
+        let existKeys = vscode_1.workspace.textDocuments.map(doc => doc.fileName);
+        oldKeys.forEach(k => {
+            k = k.split('-cnyballk-')[0];
+            if (existKeys.indexOf(k) < 0 && cache[k]) {
+                cache[k].style.dispose();
+                delete cache[k];
+            }
+        });
+    }
+    dispose() {
+        Object.keys(this.decorationCache).forEach(k => this.decorationCache[k].style.dispose());
+        this.decorationCache = {};
+        this.disposables.forEach(d => d.dispose());
     }
     decorateWxml(editor) {
         let doc = editor.document;
@@ -86,10 +104,10 @@ class ActiveText {
                 ranges,
             };
         }
-        let ranges = [...getRanges(text, TAG_REGEXP, doc, comments)];
+        let ranges = getRanges(text, TAG_REGEXP, doc, comments);
         let decorationType = vscode_1.window.createTextEditorDecorationType(Object.assign({}, { color }));
         const _cacheName = doc.fileName + '-cnyballk-color';
-        if (this.decorationCache[doc.fileName]) {
+        if (this.decorationCache[_cacheName]) {
             this.decorationCache[_cacheName].style.dispose();
         }
         editor.setDecorations(decorationType, ranges);
@@ -98,24 +116,6 @@ class ActiveText {
             style: decorationType,
             ranges,
         };
-    }
-    //更新
-    updateDecorationCache() {
-        let cache = this.decorationCache;
-        let oldKeys = Object.keys(cache);
-        let existKeys = vscode_1.workspace.textDocuments.map(doc => doc.fileName);
-        oldKeys.forEach(k => {
-            k = k.split('-cnyballk-')[0];
-            if (existKeys.indexOf(k) < 0 && cache[k]) {
-                cache[k].style.dispose();
-                delete cache[k];
-            }
-        });
-    }
-    dispose() {
-        Object.keys(this.decorationCache).forEach(k => this.decorationCache[k].style.dispose());
-        this.decorationCache = {};
-        this.disposables.forEach(d => d.dispose());
     }
 }
 exports.default = ActiveText;

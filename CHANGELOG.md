@@ -2,6 +2,12 @@
 
 All notable changes to the "wxml-vscode" extension will be documented in this file.
 
+## [0.1.2]
+
+- fix: [#9](https://github.com/cnyballk/wxml-vscode/issues/9)
+- fix: [#10](https://github.com/cnyballk/wxml-vscode/issues/10)
+- fix: [#11](https://github.com/cnyballk/wxml-vscode/issues/11)
+
 ## [0.1.1]
 
 - fix: [#8](https://github.com/cnyballk/wxml-vscode/issues/7)
