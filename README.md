@@ -22,13 +22,10 @@
 ```html
 <!-- if wxmlConfig.format.wrap_attributes_count === 2 -->
 <button id="x" class="xx"></button>
-<button id="x" >123</button>
+<button id="x">123</button>
 <!-- ⬇⬇⬇⬇ -->
-<button
-  id="x"
-  class="xx"
-/>
-<button id="x" >123</button>
+<button id="x" class="xx" />
+<button id="x">123</button>
 ```
 
 wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
@@ -77,6 +74,10 @@ wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://git
     "textarea"
   ]
 ```
+
+### Concat
+
+<img width="200" src="https://raw.githubusercontent.com/phonycode/wenaox/master/assets/WechatIMG2.jpeg">
 
 ### CHANGELOG
 

@@ -5,3 +5,4 @@ node_modules
 
 yarn-error.log
 vsc-extension-quickstart.md
+.DS_Store
