@@ -31,7 +31,7 @@
 wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
 
 ```json
-// 高亮的颜色，emm暂时只支持这样写
+// 高亮的颜色，可设置每个组件的自定义颜色, [tagName]:color
 "wxmlConfig.activeColor": {
     "color": "#e5c07b"
   },
