@@ -31,7 +31,8 @@
 wxmlConfig.format 无特殊说明的配置的属性可以[这里看](https://github.com/beautify-web/js-beautify)
 
 ```json
-// 高亮的颜色，可设置每个组件的自定义颜色, [tagName]:color
+// 高亮的颜色，可设置每个组件的自定义颜色, tagName:color
+// 例如 <custom> 想渲染成黄色，可以添加字段 "custom":"yellow"
 "wxmlConfig.activeColor": {
     "color": "#e5c07b"
   },
