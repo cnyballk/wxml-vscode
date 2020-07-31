@@ -4,6 +4,8 @@
 
 [提问题](https://github.com/cnyballk/wxml-vscode/issues)
 
+    该库我已不再维护，但需要的话可以提pr或者各自fork单独修改
+
 ## 安装
 
 通过 F1 或者 CMD + Shift + P 输入 install. 选择: Install Extension.
